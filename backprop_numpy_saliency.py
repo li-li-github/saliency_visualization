@@ -7,6 +7,11 @@ from matplotlib import cm
 x = np.linspace(-math.pi, math.pi, 2000)
 y = np.sin(x)
 
+
+def fn_3poly(x, a, b, c, d):
+    return a + b * x + c * x ** 2 + d * x ** 3
+
+
 # Randomly initialize weights
 a = np.random.randn()
 b = np.random.randn()
@@ -17,7 +22,7 @@ learning_rate = 1e-6
 for t in range(2000):
     # Forward pass: compute predicted y
     # y = a + b x + c x^2 + d x^3
-    y_pred = a + b * x + c * x ** 2 + d * x ** 3
+    y_pred = fn_3poly(x, a, b, c, d)
 
     # Compute and print loss
     loss = np.square(y_pred - y).sum()
@@ -40,14 +45,10 @@ for t in range(2000):
 print(f'Result: y = {a} + {b} x + {c} x^2 + {d} x^3')
 
 
-def fn_3d(x, a, b, c, d):
-    return a + b * x + c * x ** 2 + d * x ** 3
-
-
 x_plot = np.arange(-4, 4, 0.02)
 fig, ax = plt.subplots(1)
 ax.plot(x_plot, np.sin(x_plot))
-ax.plot(x_plot, fn_3d(x_plot, a, b, c, d))
+ax.plot(x_plot, fn_3poly(x_plot, a, b, c, d))
 ax.legend([r'$f(x)=\sin(x)$', r'$a + bx + cx^2 + dx^3$'])
 ax.spines['right'].set_visible(False)
 ax.spines['top'].set_visible(False)
@@ -56,17 +57,17 @@ fig.show()
 
 
 # Saliency map
-def fn_3d_dr(x):
-    """direvative of fn_3d"""
+def fn_3poly_dr(x):
+    """direvative of fn_3poly"""
     return b + 2 * c * x + 3 * d * x **2
 
 
-saliency = fn_3d_dr(x_plot)
+saliency = fn_3poly_dr(x_plot)
 fig, ax = plt.subplots(1)
 ax.plot(x_plot, np.sin(x_plot))
-ax.plot(x_plot, fn_3d(x_plot, a, b, c, d))
+ax.plot(x_plot, fn_3poly(x_plot, a, b, c, d))
 ax.scatter(
-    x_plot, fn_3d(x_plot, a, b, c, d), 
+    x_plot, fn_3poly(x_plot, a, b, c, d),
     c=np.array(cm.tab10.colors[1]).reshape(1, -1), marker='.', 
     s=20 * (saliency - saliency.min())
 )
