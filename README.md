@@ -13,4 +13,4 @@ https://colab.research.google.com/github/li-li-github/saliency_visualization/blo
 ## Saliency
 This [script](backprop_numpy_saliency.py) plots the saliency of the fitted function.
 
-![Alt Text](images/saliency.png)
+![Alt Text](images/saliency.gif)
