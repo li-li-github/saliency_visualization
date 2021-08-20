@@ -76,5 +76,5 @@ ax.spines['right'].set_visible(False)
 ax.spines['top'].set_visible(False)
 fig.tight_layout()
 fig.show()
-fig.savefig('saliency.png')
+fig.savefig('images/saliency.png')
 

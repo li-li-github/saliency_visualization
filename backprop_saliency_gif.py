@@ -101,7 +101,7 @@ def update(i):
         _arg = backprop.update(i)
         if i % plot_every == 0:
             loss = np.square(y_pred - y).sum()
-            label = f'iteration {i}, loss {loss:.2e}'        
+            label = f'iteration {i}, loss {loss:.2f}'
             print(label)
             ax.set_xlabel(label)
             for key, val in _arg.items():
@@ -112,6 +112,13 @@ def update(i):
             line.set_ydata(data[:, 1])
             sct.set_offsets(data)
             sct.set_sizes(20 * (saliency - saliency.min()))
+            ax.legend(
+                [r'$\sin(x)$',
+                 f'${_arg["a"]:.3f} + {_arg["b"]:.3f}x + {_arg["c"]:.3f}x^2 + '
+                 f'{_arg["d"]:.3f}x^3$'
+                 '\nthickness represents saliency'],
+                loc='upper right'
+            )
         
     return line, sct, ax
     
@@ -120,7 +127,7 @@ anim = FuncAnimation(
     fig, update, frames=range(total_iter + waiting_frame), interval=interval, 
 )
 
-anim.save('saliency.gif', dpi=80, writer='imagemagick')
+anim.save('images/saliency.gif', dpi=80, writer='imagemagick')
 
 
 

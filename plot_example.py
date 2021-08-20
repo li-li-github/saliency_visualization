@@ -13,14 +13,17 @@ def fn_lin(x, x0):
     return a * x + b
 
 
-x = np.arange(-1, 3, 0.1)
-x0 = 1
+x = np.arange(-3, 3, 0.1)
 
 fig, ax = plt.subplots(1)
 ax.plot(x, fn(x))
-ax.plot(x, fn_lin(x, x0))
-ax.legend([r'$f(x)=x^2$', r'$\frac{df}{dx}$'])
+ax.plot(np.arange(0, 2, 0.1), fn_lin(np.arange(0, 2, 0.1), 1))
+ax.plot(np.arange(-2, 0, 0.1), fn_lin(np.arange(-2, 0, 0.1), -1))
+ax.legend(
+    [r'$f(x)=x^2$', r'$\frac{df}{dx}$ positive', r'$\frac{df}{dx}$ negative']
+)
 ax.spines['right'].set_visible(False)
 ax.spines['top'].set_visible(False)
 fig.tight_layout()
 fig.show()
+fig.savefig('images/slope.png')
