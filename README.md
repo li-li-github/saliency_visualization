@@ -8,6 +8,6 @@ This [jupyter notebook](backpropagation_tutorial.ipynb) walk you through how bac
 
 
 ## Saliency
-This jupyter notebook shows saliency of the fitted function.
+This [script](backprop_numpy_saliency.py) plots the saliency of the fitted function.
 
 ![Alt Text](images/saliency.png)
